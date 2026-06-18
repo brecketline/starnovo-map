@@ -1,6 +1,7 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import maplibregl from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
+import LandmarkLayer from './LandmarkLayer'
 
 const medievalStyle = {
   version: 8,
@@ -38,6 +39,7 @@ const medievalStyle = {
 function MapView() {
   const mapContainer = useRef(null)
   const map = useRef(null)
+  const [mapReady, setMapReady] = useState(false)
 
   useEffect(() => {
     if (map.current) return
@@ -48,13 +50,17 @@ function MapView() {
       center: [25.6525, 43.0818],
       zoom: 15
     })
+
+    map.current.on('load', () => {
+      setMapReady(true)
+    })
   }, [])
 
   return (
-    <div
-      ref={mapContainer}
-      style={{ width: '100%', height: '100%' }}
-    />
+    <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+      <div ref={mapContainer} style={{ width: '100%', height: '100%' }} />
+      {mapReady && <LandmarkLayer map={map.current} />}
+    </div>
   )
 }
 
