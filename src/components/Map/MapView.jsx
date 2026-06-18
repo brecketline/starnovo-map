@@ -26,10 +26,10 @@ const medievalStyle = {
       type: 'raster',
       source: 'osm',
       paint: {
-        'raster-opacity': 0.3,
+        'raster-opacity': 0.55,
         'raster-saturation': -1,
-        'raster-contrast': 0.2,
-        'raster-brightness-min': 0.8
+        'raster-contrast': 0.3,
+        'raster-brightness-min': 0.6
       }
     }
   ]
