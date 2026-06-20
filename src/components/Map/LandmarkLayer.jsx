@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import maplibregl from 'maplibre-gl'
 import { landmarks } from '../../data/landmarks'
 
-function LandmarkLayer({ map }) {
+function LandmarkLayer({ map, onMarkerClick }) {
   useEffect(() => {
     if (!map) return
 
@@ -11,7 +11,7 @@ function LandmarkLayer({ map }) {
     landmarks.forEach((landmark) => {
       const el = document.createElement('div')
       el.className = 'landmark-marker'
-      el.innerHTML = '⚔'
+      el.innerHTML = '✦'
       el.style.cssText = `
         width: 32px;
         height: 32px;
@@ -22,9 +22,14 @@ function LandmarkLayer({ map }) {
         align-items: center;
         justify-content: center;
         font-size: 14px;
+        color: #F4E8C1;
         cursor: pointer;
         box-shadow: 0 2px 6px rgba(0,0,0,0.4);
       `
+
+      el.addEventListener('click', () => {
+        onMarkerClick(landmark)
+      })
 
       const marker = new maplibregl.Marker({ element: el })
         .setLngLat(landmark.coordinates)
@@ -36,7 +41,7 @@ function LandmarkLayer({ map }) {
     return () => {
       markers.forEach((marker) => marker.remove())
     }
-  }, [map])
+  }, [map, onMarkerClick])
 
   return null
 }
