@@ -15,14 +15,14 @@ const medievalStyle = {
     },
     terrain: {
       type: 'raster-dem',
-      url: 'https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png',
+      tiles: ['https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png'],
       tileSize: 256,
       encoding: 'terrarium'
     }
   },
   terrain: {
     source: 'terrain',
-    exaggeration: 1.5
+    exaggeration: 1.8
   },
   layers: [
     {
@@ -134,7 +134,10 @@ function MapView() {
       container: mapContainer.current,
       style: medievalStyle,
       center: [25.6525, 43.0818],
-      zoom: 15
+      zoom: 15,
+      pitch: 55,
+      maxPitch: 70,
+      bearing: -17
     })
 
     map.current.on('load', () => {
