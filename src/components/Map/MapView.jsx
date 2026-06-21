@@ -26,18 +26,73 @@ const medievalStyle = {
         properties: {},
         geometry: {
           type: 'Polygon',
+          coordinates: [
+            [
+              [25.6535, 43.0820],
+              [25.6558, 43.0815],
+              [25.6575, 43.0828],
+              [25.6578, 43.0845],
+              [25.6560, 43.0852],
+              [25.6540, 43.0845],
+              [25.6532, 43.0832],
+              [25.6535, 43.0820]
+            ],
+            [
+              [25.6540, 43.0824],
+              [25.6555, 43.0820],
+              [25.6568, 43.0830],
+              [25.6570, 43.0840],
+              [25.6555, 43.0846],
+              [25.6542, 43.0840],
+              [25.6538, 43.0830],
+              [25.6540, 43.0824]
+            ]
+          ]
+        }
+      }
+    },
+    'cathedral-point': {
+      type: 'geojson',
+      data: {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'Polygon',
           coordinates: [[
-            [25.6535, 43.0820],
-            [25.6558, 43.0815],
-            [25.6575, 43.0828],
-            [25.6578, 43.0845],
-            [25.6560, 43.0852],
-            [25.6540, 43.0845],
-            [25.6532, 43.0832],
-            [25.6535, 43.0820]
+            [25.6552, 43.0833],
+            [25.6558, 43.0833],
+            [25.6558, 43.0838],
+            [25.6552, 43.0838],
+            [25.6552, 43.0833]
           ]]
         }
       }
+    },
+    'tsarevets-trees': {
+      type: 'geojson',
+      data: {
+        type: 'FeatureCollection',
+        features: [
+          { type: 'Feature', properties: {}, geometry: { type: 'Point', coordinates: [25.6545, 43.0810] } },
+          { type: 'Feature', properties: {}, geometry: { type: 'Point', coordinates: [25.6562, 43.0808] } },
+          { type: 'Feature', properties: {}, geometry: { type: 'Point', coordinates: [25.6582, 43.0822] } },
+          { type: 'Feature', properties: {}, geometry: { type: 'Point', coordinates: [25.6585, 43.0838] } },
+          { type: 'Feature', properties: {}, geometry: { type: 'Point', coordinates: [25.6570, 43.0855] } },
+          { type: 'Feature', properties: {}, geometry: { type: 'Point', coordinates: [25.6545, 43.0852] } },
+          { type: 'Feature', properties: {}, geometry: { type: 'Point', coordinates: [25.6525, 43.0838] } },
+          { type: 'Feature', properties: {}, geometry: { type: 'Point', coordinates: [25.6528, 43.0822] } }
+        ]
+      }
+    },
+    'tsarevets-illustration': {
+      type: 'image',
+      url: '/assets/tsarevets-fortress.png',
+      coordinates: [
+        [25.6505, 43.0855],
+        [25.6590, 43.0855],
+        [25.6590, 43.0805],
+        [25.6505, 43.0805]
+      ]
     }
   },
   terrain: {
@@ -103,14 +158,12 @@ const medievalStyle = {
       }
     },
     {
-      id: 'tsarevets-3d',
-      type: 'fill-extrusion',
-      source: 'tsarevets-footprint',
+      id: 'tsarevets-illustration-layer',
+      type: 'raster',
+      source: 'tsarevets-illustration',
       paint: {
-        'fill-extrusion-color': '#8B3A1A',
-        'fill-extrusion-height': 35,
-        'fill-extrusion-base': 0,
-        'fill-extrusion-opacity': 0.95
+        'raster-opacity': 1,
+        'raster-fade-duration': 0
       }
     },
     {
