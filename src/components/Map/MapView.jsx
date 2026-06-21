@@ -18,6 +18,26 @@ const medievalStyle = {
       tiles: ['https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png'],
       tileSize: 256,
       encoding: 'terrarium'
+    },
+    'tsarevets-footprint': {
+      type: 'geojson',
+      data: {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'Polygon',
+          coordinates: [[
+            [25.6535, 43.0820],
+            [25.6558, 43.0815],
+            [25.6575, 43.0828],
+            [25.6578, 43.0845],
+            [25.6560, 43.0852],
+            [25.6540, 43.0845],
+            [25.6532, 43.0832],
+            [25.6535, 43.0820]
+          ]]
+        }
+      }
     }
   },
   terrain: {
@@ -66,14 +86,31 @@ const medievalStyle = {
       }
     },
     {
-      id: 'building',
-      type: 'fill',
+      id: 'building-3d',
+      type: 'fill-extrusion',
       source: 'openmaptiles',
       'source-layer': 'building',
       paint: {
-        'fill-color': '#DDD0A8',
-        'fill-outline-color': '#B8A882',
-        'fill-opacity': 0.8
+        'fill-extrusion-color': '#DDD0A8',
+        'fill-extrusion-height': [
+          'case',
+          ['has', 'render_height'],
+          ['get', 'render_height'],
+          8
+        ],
+        'fill-extrusion-base': 0,
+        'fill-extrusion-opacity': 0.92
+      }
+    },
+    {
+      id: 'tsarevets-3d',
+      type: 'fill-extrusion',
+      source: 'tsarevets-footprint',
+      paint: {
+        'fill-extrusion-color': '#8B3A1A',
+        'fill-extrusion-height': 35,
+        'fill-extrusion-base': 0,
+        'fill-extrusion-opacity': 0.95
       }
     },
     {
