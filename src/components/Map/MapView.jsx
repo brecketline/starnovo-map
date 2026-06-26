@@ -19,39 +19,28 @@ const medievalStyle = {
       tileSize: 256,
       encoding: 'terrarium'
     },
-    'tsarevets-footprint': {
+    'tsarevets-walls': {
       type: 'geojson',
       data: {
         type: 'Feature',
         properties: {},
         geometry: {
-          type: 'Polygon',
+          type: 'LineString',
           coordinates: [
-            [
-              [25.6535, 43.0820],
-              [25.6558, 43.0815],
-              [25.6575, 43.0828],
-              [25.6578, 43.0845],
-              [25.6560, 43.0852],
-              [25.6540, 43.0845],
-              [25.6532, 43.0832],
-              [25.6535, 43.0820]
-            ],
-            [
-              [25.6540, 43.0824],
-              [25.6555, 43.0820],
-              [25.6568, 43.0830],
-              [25.6570, 43.0840],
-              [25.6555, 43.0846],
-              [25.6542, 43.0840],
-              [25.6538, 43.0830],
-              [25.6540, 43.0824]
-            ]
+            [25.6530, 43.0818],
+            [25.6555, 43.0810],
+            [25.6578, 43.0822],
+            [25.6582, 43.0840],
+            [25.6568, 43.0853],
+            [25.6545, 43.0855],
+            [25.6528, 43.0843],
+            [25.6524, 43.0828],
+            [25.6530, 43.0818]
           ]
         }
       }
     },
-    'cathedral-point': {
+    'baldwins-tower': {
       type: 'geojson',
       data: {
         type: 'Feature',
@@ -59,40 +48,65 @@ const medievalStyle = {
         geometry: {
           type: 'Polygon',
           coordinates: [[
-            [25.6552, 43.0833],
-            [25.6558, 43.0833],
-            [25.6558, 43.0838],
-            [25.6552, 43.0838],
-            [25.6552, 43.0833]
+            [25.6576, 43.0836],
+            [25.6580, 43.0836],
+            [25.6580, 43.0840],
+            [25.6576, 43.0840],
+            [25.6576, 43.0836]
           ]]
         }
       }
     },
-    'tsarevets-trees': {
+    'tsarevets-tower-south': {
       type: 'geojson',
       data: {
-        type: 'FeatureCollection',
-        features: [
-          { type: 'Feature', properties: {}, geometry: { type: 'Point', coordinates: [25.6545, 43.0810] } },
-          { type: 'Feature', properties: {}, geometry: { type: 'Point', coordinates: [25.6562, 43.0808] } },
-          { type: 'Feature', properties: {}, geometry: { type: 'Point', coordinates: [25.6582, 43.0822] } },
-          { type: 'Feature', properties: {}, geometry: { type: 'Point', coordinates: [25.6585, 43.0838] } },
-          { type: 'Feature', properties: {}, geometry: { type: 'Point', coordinates: [25.6570, 43.0855] } },
-          { type: 'Feature', properties: {}, geometry: { type: 'Point', coordinates: [25.6545, 43.0852] } },
-          { type: 'Feature', properties: {}, geometry: { type: 'Point', coordinates: [25.6525, 43.0838] } },
-          { type: 'Feature', properties: {}, geometry: { type: 'Point', coordinates: [25.6528, 43.0822] } }
-        ]
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'Polygon',
+          coordinates: [[
+            [25.6527, 43.0820],
+            [25.6533, 43.0820],
+            [25.6533, 43.0826],
+            [25.6527, 43.0826],
+            [25.6527, 43.0820]
+          ]]
+        }
       }
     },
-    'tsarevets-illustration': {
-      type: 'image',
-      url: '/assets/tsarevets-fortress.png',
-      coordinates: [
-        [25.6505, 43.0855],
-        [25.6590, 43.0855],
-        [25.6590, 43.0805],
-        [25.6505, 43.0805]
-      ]
+    'cathedral-base': {
+      type: 'geojson',
+      data: {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'Polygon',
+          coordinates: [[
+            [25.6549, 43.0830],
+            [25.6560, 43.0830],
+            [25.6560, 43.0838],
+            [25.6549, 43.0838],
+            [25.6549, 43.0830]
+          ]]
+        }
+      }
+    },
+    'cathedral-dome': {
+      type: 'geojson',
+      data: {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'Polygon',
+          coordinates: [[
+            [25.6552, 43.0832],
+            [25.6557, 43.0832],
+            [25.6557, 43.0836],
+            [25.6552, 43.0836],
+            [25.6552, 43.0832]
+          ]]
+        }
+      }
     }
   },
   terrain: {
@@ -158,12 +172,57 @@ const medievalStyle = {
       }
     },
     {
-      id: 'tsarevets-illustration-layer',
-      type: 'raster',
-      source: 'tsarevets-illustration',
+      id: 'tsarevets-walls-3d',
+      type: 'line',
+      source: 'tsarevets-walls',
       paint: {
-        'raster-opacity': 1,
-        'raster-fade-duration': 0
+        'line-color': '#9E8B6E',
+        'line-width': 8,
+        'line-opacity': 0.95
+      }
+    },
+    {
+      id: 'tsarevets-tower-south-3d',
+      type: 'fill-extrusion',
+      source: 'tsarevets-tower-south',
+      paint: {
+        'fill-extrusion-color': '#8B7355',
+        'fill-extrusion-height': 55,
+        'fill-extrusion-base': 0,
+        'fill-extrusion-opacity': 1
+      }
+    },
+    {
+      id: 'cathedral-base-3d',
+      type: 'fill-extrusion',
+      source: 'cathedral-base',
+      paint: {
+        'fill-extrusion-color': '#DDD0A8',
+        'fill-extrusion-height': 48,
+        'fill-extrusion-base': 0,
+        'fill-extrusion-opacity': 1
+      }
+    },
+    {
+      id: 'cathedral-dome-3d',
+      type: 'fill-extrusion',
+      source: 'cathedral-dome',
+      paint: {
+        'fill-extrusion-color': '#C4622D',
+        'fill-extrusion-height': 65,
+        'fill-extrusion-base': 48,
+        'fill-extrusion-opacity': 1
+      }
+    },
+    {
+      id: 'baldwins-tower-3d',
+      type: 'fill-extrusion',
+      source: 'baldwins-tower',
+      paint: {
+        'fill-extrusion-color': '#4A3728',
+        'fill-extrusion-height': 90,
+        'fill-extrusion-base': 0,
+        'fill-extrusion-opacity': 1
       }
     },
     {
